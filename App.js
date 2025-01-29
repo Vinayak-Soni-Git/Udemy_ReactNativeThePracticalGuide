@@ -1,20 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import {NavigationContainer} from "@react-navigation/native";
+import {createNativeStackNavigator} from "react-native-screens/native-stack";
+import MainNavigationApp from "./apps/navigationmealsapp/MainNavigationApp";
+import Home from "./apps/Home";
+import Routes from './apps/routes/Routes'
+import MainDrawerApp from "./apps/drawerapp/MainDrawerApp";
+import MainBottomTabsApp from "./apps/bottomtabsapp/MainBottomTabsApp";
+import MainMiniGame from "./apps/minigame/MainMiniGame";
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+    return (
+        <NavigationContainer>
+            <Stack.Navigator initialRouteName="Home">
+                <Stack.Screen name={Routes.Home} component={Home} />
+                <Stack.Screen name={Routes.NavigationApp} component={MainNavigationApp} options={{
+                    headerShown:false
+                }}/>
+                <Stack.Screen name={Routes.DrawerApp} component={MainDrawerApp} options={{
+                    headerShown:false
+                }}/>
+                <Stack.Screen name={Routes.BottomTabsApp} component={MainBottomTabsApp} options={{
+                    headerShown:false
+                }}/>
+                <Stack.Screen name={Routes.MiniGame} component={MainMiniGame} options={{
+                    headerShown:false
+                }}/>
+            </Stack.Navigator>
+        </NavigationContainer>
+    )
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+}
